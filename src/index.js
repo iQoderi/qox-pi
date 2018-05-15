@@ -1,20 +1,42 @@
 import {createElement, Component} from 'rax';
-import View from 'rax-view';
-import Text from 'rax-text';
+import QoxPage from 'qox-page';
 import styles from './style.css';
 
+const REG_PAGEID = /\?pageId=\d+$/ig;
+const API_PREFIX = 'http://127.0.0.1:7001/page/modules?pageId=';
+
 class App extends Component {
+  state = {
+    modules: []
+  }
+
+  componentWillMount() {
+    const match = location.href.match(REG_PAGEID);
+
+    if (match) {
+      const pageId = match[0].split('=')[1];
+      const uri = `${API_PREFIX}${pageId}`;
+
+      fetch(uri).then((res) => {
+        return res.json();
+      }).then((ret) => {
+        if (ret.code === 0) {
+          this.setState({
+            modules: ret.data.modules
+          });
+        }
+      });
+    }
+  }
+
   render() {
-    return (
-      <View style={styles.app}>
-        <View style={styles.appHeader}>
-          <Text style={styles.appBanner}>Welcome to Rax</Text>
-        </View>
-        <Text style={styles.appIntro}>
-          To get started, edit src/App.js and save to reload.
-        </Text>
-      </View>
-    );
+    const { modules } = this.state;
+
+    if(modules.length > 0) {
+      return <QoxPage modules={modules} />
+    }
+
+    return null;
   }
 }
 

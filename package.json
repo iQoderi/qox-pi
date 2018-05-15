@@ -1,11 +1,10 @@
 {
-    "name": "qox-pi",
-    "version": "0.0.1",
-    "main": "index.js",
-    "license": "MIT",
-    "dependencies": {
-        "rax": "0.x.x",
-        "rax-text": "0.x.x",
-        "rax-view": "0.x.x"
-    }
+  "name": "qox-pi",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "qox-page": "^0.0.1",
+    "rax": "0.x.x"
+  }
 }
