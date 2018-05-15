@@ -1,4 +1,4 @@
-import {createElement, Component} from 'rax';
+import { createElement, Component, render } from 'rax';
 import QoxPage from 'qox-page';
 import styles from './style.css';
 
@@ -40,4 +40,4 @@ class App extends Component {
   }
 }
 
-export default App;
+render(<App/>);
